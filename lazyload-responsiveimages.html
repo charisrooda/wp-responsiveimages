@@ -1,0 +1,32 @@
+<!-- This all happens in the Wordpress loop -->
+
+<!-- get image and put it in var called 'img'-->
+<?php $img = get_field('image'); ?>
+
+<!-- print_r so you can see what's available-->
+<pre>
+	<?php
+	$img = get_field('image');
+	print_r($img)
+	?>
+</pre>
+
+<!-- Lazyload: https://afarkas.github.io/lazysizes/index.html -->
+<!-- add class lazyload for lazyload -->
+<!-- used data-src, data-srcset, data-sizes for the lazyload -->
+<!-- Make sure you have added all sizes in your functions.php to get the right image sizes -->
+<!-- Run regenerate thumbnails, in case you don't see the right images -->
+<!-- Links about responsive images:
+  - https://ericportis.com/posts/2014/srcset-sizes/
+  - https://www.smashingmagazine.com/2014/05/responsive-images-done-right-guide-picture-srcset/
+  - https://cloudfour.com/thinks/responsive-images-101-definitions/
+  - https://jakearchibald.com/2015/anatomy-of-responsive-images/
+ -->
+
+<img
+class="lazyload"
+data-src="<?php echo $img['sizes']['r-small-long']; ?>"
+data-srcset="<?php echo $img['sizes']['r-medium-long']; ?> <?php echo $img['sizes']['r-medium-long-width']; ?>w, <?php echo $img['sizes']['r-small-long']; ?> <?php echo $img['sizes']['r-small-long-width']; ?>w, <?php echo $img['sizes']['r-xsmall-long']; ?> <?php echo $img['sizes']['r-xsmall-long-width']; ?>w"
+data-sizes="(min-width: 720px) 50vw, (min-width: 912px) 30vw, 100vw"
+alt="<?php echo $img['alt']; ?>"
+/>
